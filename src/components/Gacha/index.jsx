@@ -1,6 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import hero from "public/hero.png";
+import { Bonus } from "src/components/Bonus";
+
+const tableITEMS = [
+  {
+    title: "ハズレ",
+    countId: "miss",
+    percentageID: "missPercentage",
+  },
+  {
+    title: "アタリ",
+    countId: "hit",
+    percentageID: "hitPercentage",
+  },
+  {
+    title: "太陽の塔子",
+    countId: "bigHit",
+    percentageID: "bigHitPercentage",
+  },
+];
 
 export const Gacha = () => {
   // 初期値の設定
@@ -35,11 +54,11 @@ export const Gacha = () => {
     const countGacha = document.getElementById("gachaValue");
     const countMoney = document.getElementById("money");
     countMiss.innerHTML = missValue;
+    countHit.innerHTML = hitValue;
+    countBigHit.innerHTML = bigHitValue;
     missPercentage.innerHTML =
       Math.round((missValue / gachaValue) * 10000) / 100;
-    countHit.innerHTML = hitValue;
     hitPercentage.innerHTML = Math.round((hitValue / gachaValue) * 10000) / 100;
-    countBigHit.innerHTML = bigHitValue;
     bigHitPercentage.innerHTML =
       Math.round((bigHitValue / gachaValue) * 10000) / 100;
     countGacha.innerHTML = gachaValue;
@@ -75,25 +94,10 @@ export const Gacha = () => {
     }
   };
 
-  const calcGameTime = () => {
-    // inputの要素を取得
-    const getTimeInput = document.getElementById("playTimeInput");
-    const getDaysInput = document.getElementById("playDaysInput");
-    // 要素を取得したinputの値を取得
-    const getTimeValue = getTimeInput.value;
-    const getDaysValue = getDaysInput.value;
-    // 出力先を取得
-    const playTime = document.getElementById("playTime");
-    const lossMoney = document.getElementById("lossMoney");
-    // 取得した値を指定した要素に出力
-    playTime.innerHTML = (getTimeValue * getDaysValue) / 60;
-    lossMoney.innerHTML = ((getTimeValue * getDaysValue) / 60) * 1000;
-  };
-
   return (
     <div>
       <div className="py-4 text-center">
-        <h1 className="text-3xl font-bold text-center py-4">
+        <h1 className="text-3xl font-bold text-center py-10">
           話題の最強キャラ「太陽の塔子」 を一転狙いしよう！！
         </h1>
         <Image
@@ -110,97 +114,62 @@ export const Gacha = () => {
       </span>
       <div className="container py-10">
         <div className="text-center space-x-4">
-          <button onClick={single} className="btn">
+          <button onClick={single} className="btn btn_basic">
             ガチャを引く
           </button>
-          <button onClick={tenCount} className="btn">
+          <button onClick={tenCount} className="btn btn_basic">
             10連ガチャを引く
           </button>
-          <button onClick={fullCount} className="btn">
+          <button onClick={fullCount} className="btn btn_basic">
             お目当てが出るまで引く
           </button>
         </div>
-        <span>ガチャを引いた回数</span>
-        <span id="gachaValue">0</span>
-        <span>回</span>
-        <br />
-        <span>ハズレの回数</span>
-        <span id="miss">0</span>
-        <span>回</span>
-        <br />
 
-        <span>ハズレ確率</span>
-        <span id="missPercentage">0</span>
-        <span>%</span>
-        <br />
-
-        <span>アタリの回数</span>
-        <span id="hit">0</span>
-        <span>回</span>
-        <br />
-
-        <span>アタリ確率</span>
-        <span id="hitPercentage">0</span>
-        <span>%</span>
-        <br />
-
-        <span>太陽の塔子が出た回数</span>
-        <span id="bigHit">0</span>
-        <span>回</span>
-        <br />
-
-        <span>太陽の塔子が出た確率</span>
-        <span id="bigHitPercentage">0</span>
-        <span>%</span>
-
-        <br />
-        <span>かかった金額</span>
-        <span id="money">0</span>
-        <span>円</span>
-      </div>
-
-      <div className="py-10">
-        <h1 className="py-4 text-3xl font-bold text-center bg-black text-red-500">
-          【おまけ】スマホゲームに捧げた命の時間
-        </h1>
-        <div className="container">
-          <span>
-            一日のプレイ時間
-            <br />約
-          </span>
-          <input
-            type="number"
-            id="playTimeInput"
-            placeholder="入力"
-            className="input"
-          />
-          <span>分</span>
-          <br />
-          <span>
-            合計ログイン日数
-            <br />約
-          </span>
-          <input
-            type="number"
-            id="playDaysInput"
-            placeholder="入力"
-            className="input"
-          />
-          <span>日</span>
-          <br />
-          <button onClick={calcGameTime} className="btn">
-            計算
-          </button>
-          <br />
-          <span>合計</span>
-          <span id="playTime">0</span>
-          <span>時間</span>
-          <br />
-          <span>時給1,000円計算で約</span>
-          <span id="lossMoney">0</span>
-          <span>円の損失</span>
+        <div className="py-4 flex gap-4">
+          {tableITEMS.map((item) => {
+            return (
+              <dl
+                key={item.title}
+                className="flex flex-wrap w-4/12 mx-auto py-4"
+              >
+                <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
+                  <span>{item.title}が出た回数</span>
+                </dt>
+                <dd className="w-6/12 text-right border border-gray-400 px-1 py-2">
+                  <span id={item.countId}>0</span>
+                  <span>回</span>
+                </dd>
+                <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
+                  <span>{item.title}の確率</span>
+                </dt>
+                <dd className="w-6/12 text-right border border-gray-400 px-1 py-2">
+                  <span id={item.percentageID}>0</span>
+                  <span>%</span>
+                </dd>
+              </dl>
+            );
+          })}
         </div>
+
+        <dl className="flex flex-wrap w-4/12 ml-auto mr-0 py-4">
+          <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
+            <span>ガチャを引いた回数</span>
+          </dt>
+          <dd className="w-6/12 text-right border border-gray-400 px-1 py-2">
+            <span id="gachaValue">0</span>
+            <span>回</span>
+          </dd>
+          <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
+            <span>かかった金額</span>
+          </dt>
+          <dd className="w-6/12 text-right border border-gray-400 px-1 py-2">
+            <span id="money">0</span>
+            <span>円</span>
+          </dd>
+        </dl>
       </div>
+
+      <Bonus />
     </div>
   );
 };

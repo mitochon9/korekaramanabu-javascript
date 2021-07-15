@@ -24,15 +24,18 @@ export const Bonus = () => {
 
   return (
     <div className="py-10">
-      <h1 className="py-4 text-3xl font-bold text-center bg-black text-yellow-300">
+      <h1 className="py-4 text-3xl font-bold text-center bg-black text-yellow-300 sm:text-2xl">
         【おまけ】
         <br />
         スマホゲームに捧げた命の時間
       </h1>
       <div className="container py-10">
-        <div className="flex justify-center gap-8">
+        <p className="text-center sm:text-left sm:flex sm:justify-center">
+          課金はしてないからセーフ！と思ったそこのあなた！ 時は金なりですよ！！
+        </p>
+        <div className="flex justify-center gap-8 py-4 sm:flex-col sm:text-center">
           <div>
-            <span>
+            <span className="font-bold">
               一日のプレイ時間
               <br />約
             </span>
@@ -40,12 +43,12 @@ export const Bonus = () => {
               type="number"
               id="playTimeInput"
               placeholder="入力"
-              className="input"
+              className="input mx-2"
             />
             <span>分</span>
           </div>
           <div>
-            <span>
+            <span className="font-bold">
               合計ログイン日数
               <br />約
             </span>
@@ -53,7 +56,7 @@ export const Bonus = () => {
               type="number"
               id="playDaysInput"
               placeholder="入力"
-              className="input"
+              className="input mx-2"
             />
             <span>日</span>
           </div>
@@ -61,7 +64,7 @@ export const Bonus = () => {
 
         <div className="text-center py-4">
           <button onClick={calcGameTime} className="btn btn_caution">
-            計算
+            計算する
           </button>
         </div>
 
@@ -74,7 +77,7 @@ export const Bonus = () => {
             <span>時間</span>
           </div>
           <div>
-            <span>時給1,000円計算で約</span>
+            <span>時給1,000円計算で </span>
             <span id="lossMoney" className="text-3xl text-red-500 px-1">
               0
             </span>

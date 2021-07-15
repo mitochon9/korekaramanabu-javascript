@@ -38,6 +38,7 @@ export const Gacha = () => {
       hitValue += 1;
       gachaValue += 1;
     } else {
+      hitValue += 1;
       bigHitValue += 1;
       gachaValue += 1;
     }
@@ -97,7 +98,7 @@ export const Gacha = () => {
   return (
     <div>
       <div className="py-4 text-center">
-        <h1 className="text-3xl font-bold text-center py-10">
+        <h1 className="text-3xl font-bold text-center py-10 sm:text-2xl">
           話題の最強キャラ「太陽の塔子」 を一転狙いしよう！！
         </h1>
         <Image
@@ -113,7 +114,7 @@ export const Gacha = () => {
         一回あたりのガチャ単価：280円
       </span>
       <div className="container py-10">
-        <div className="text-center space-x-4">
+        <div className="text-center space-x-4 sm:space-y-2">
           <button onClick={single} className="btn btn_basic">
             ガチャを引く
           </button>
@@ -125,12 +126,12 @@ export const Gacha = () => {
           </button>
         </div>
 
-        <div className="py-4 flex gap-4">
+        <div className="py-4 flex gap-4 sm:flex-col">
           {tableITEMS.map((item) => {
             return (
               <dl
                 key={item.title}
-                className="flex flex-wrap w-4/12 mx-auto py-4"
+                className="flex flex-wrap w-4/12 mx-auto py-4 sm:w-11/12 sm:py-0"
               >
                 <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
                   <span>{item.title}が出た回数</span>
@@ -151,7 +152,7 @@ export const Gacha = () => {
           })}
         </div>
 
-        <dl className="flex flex-wrap w-4/12 ml-auto mr-0 py-4">
+        <dl className="flex flex-wrap w-4/12 ml-auto mr-0 py-4 sm:w-11/12 sm:mx-auto">
           <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
             <span>ガチャを引いた回数</span>
           </dt>

@@ -45,7 +45,7 @@ export const Bonus = () => {
               placeholder="入力"
               className="input mx-2"
             />
-            <span>分</span>
+            <span className="font-bold">分</span>
           </div>
           <div>
             <span className="font-bold">
@@ -58,7 +58,7 @@ export const Bonus = () => {
               placeholder="入力"
               className="input mx-2"
             />
-            <span>日</span>
+            <span className="font-bold">日</span>
           </div>
         </div>
 
@@ -68,7 +68,7 @@ export const Bonus = () => {
           </button>
         </div>
 
-        <div className="text-right">
+        <div className="text-center">
           <div>
             <span>プレイ時間合計</span>
             <span id="playTime" className="text-3xl text-red-500 px-1">

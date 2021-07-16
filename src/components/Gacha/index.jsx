@@ -16,7 +16,7 @@ const tableITEMS = [
     percentageID: "hitPercentage",
   },
   {
-    title: "太陽の塔子",
+    title: "お目当てキャラ",
     countId: "bigHit",
     percentageID: "bigHitPercentage",
   },
@@ -31,23 +31,31 @@ export const Gacha = () => {
 
   // 結果をカウントする関数
   const countResult = () => {
+    // resultの要素を取得
     const result = document.getElementById("result");
+    // 0から999までランダムに選ばれる関数を変数に格納
     const probability = Math.round(Math.random() * 999);
+    // 0から879なら（88％）
     if (probability <= 879) {
+      // 各変数をカウント
       missValue += 1;
       gachaValue += 1;
-      const missMessage = document.createTextNode("ハズレ！");
+      // ハズレのメッセージを作成して出力
+      const missMessage = document.createTextNode("ハズレ！ ");
       result.appendChild(missMessage);
     } else if (probability <= 996) {
+      // 各変数をカウント
+
       hitValue += 1;
       gachaValue += 1;
-      const hitMessage = document.createTextNode("アタリ！");
+      // アタリのメッセージを作成して出力
+      const hitMessage = document.createTextNode("アタリ！ ");
       result.appendChild(hitMessage);
     } else {
       hitValue += 1;
       bigHitValue += 1;
       gachaValue += 1;
-      const bigHitMessage = document.createTextNode("大当たり！");
+      const bigHitMessage = document.createTextNode("大当たり！ ");
       result.appendChild(bigHitMessage);
     }
   };
@@ -75,12 +83,14 @@ export const Gacha = () => {
   };
 
   const single = () => {
+    const result = document.getElementById("result");
     result.innerHTML = "";
     countResult();
     innerResult();
   };
 
   const tenCount = () => {
+    const result = document.getElementById("result");
     result.innerHTML = "";
     for (let index = 0; index < 10; index++) {
       countResult();
@@ -157,10 +167,15 @@ export const Gacha = () => {
 
   return (
     <div>
-      <div className="md:py-4 py-0 text-center">
-        <h1 className="md:text-3xl font-bold text-center md:py-10 py-4 text-2xl">
-          話題の最強キャラ「太陽の塔子」 を一点狙いしよう！！
-        </h1>
+      <div className="md:py-4 py-0">
+        <div className="container md:py-10 py-4">
+          <h1 className="md:text-3xl font-bold flex justify-center text-2xl">
+            話題の最強キャラ「太陽の塔子」 を一点狙いしよう！！
+          </h1>
+          <span className="block text-center text-lg md:text-xl mt-2">
+            お目当てキャラ1点狙いシミュレーター
+          </span>
+        </div>
         <Image
           src={hero}
           alt="メインビジュアル"
@@ -171,7 +186,7 @@ export const Gacha = () => {
         />
       </div>
       <span className="container block text-right md:text-base text-sm">
-        ※ハズレ確率：88％ アタリ確率：12％ 太陽の塔子の出る確率：0.4%
+        ※ハズレ確率：88％ アタリ確率：12％ お目当てキャラの出る確率：0.4%
         一回あたりのガチャ単価：280円
       </span>
       <div className="container py-10">
@@ -183,24 +198,26 @@ export const Gacha = () => {
             10連ガチャを引く
           </button>
           <button onClick={fullCount} className="btn btn_basic">
-            お目当てが出るまで引く
+            お目当てキャラが出るまで引く
           </button>
         </div>
 
         <div className="py-4">
-          <h2 className="text-center font-bold text-2xl">結果</h2>
-          <div className="flex flex-col md:flex-row md:gap-6 text-xl mt-4">
-            <span>単発・10連ガチャ：</span>
+          <h2 className="text-center font-bold text-2xl">今回の結果</h2>
+          <div className="flex flex-col md:flex-row md:gap-6 text-xl mt-2 md:mt-4">
+            <span className="font-bold">単発・10連ガチャ</span>
             <span id="result"></span>
           </div>
           <div className="flex flex-col md:flex-row gap-2 md:gap-6 text-xl mt-4">
-            <span>出るまでガチャ：</span>
+            <span className="font-bold">出るまでガチャ</span>
             <div>
               <span>ハズレ</span>
               <span
                 id="missResult"
                 className="border border-gray-400 px-4 py-1 mx-1"
-              ></span>
+              >
+                0
+              </span>
               <span>回</span>
             </div>
             <div>
@@ -208,7 +225,9 @@ export const Gacha = () => {
               <span
                 id="hitResult"
                 className="border border-gray-400 px-2 py-1 mx-1"
-              ></span>
+              >
+                0
+              </span>
               <span>回</span>
             </div>
             <div>
@@ -216,7 +235,9 @@ export const Gacha = () => {
               <span
                 id="bigHitResult"
                 className="border border-gray-400 px-2 py-1 mx-1"
-              ></span>
+              >
+                0
+              </span>
               <span>回</span>
             </div>
           </div>
@@ -229,19 +250,19 @@ export const Gacha = () => {
               return (
                 <dl
                   key={item.title}
-                  className="flex flex-wrap md:w-4/12 mx-auto md:py-4 w-full py-0"
+                  className="flex flex-wrap md:w-4/12 mx-auto md:py-4 w-full py-2"
                 >
-                  <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
+                  <dt className="w-8/12 md:w-6/12 text-center border border-gray-400 px-1 py-2">
                     <span>{item.title}が出た回数</span>
                   </dt>
-                  <dd className="w-6/12 text-right border border-gray-400 px-1 py-2">
+                  <dd className="w-4/12 md:w-6/12 text-right border border-gray-400 px-1 py-2">
                     <span id={item.countId}>0</span>
                     <span>回</span>
                   </dd>
-                  <dt className="w-6/12 text-center border border-gray-400 px-1 py-2">
+                  <dt className="w-8/12 md:w-6/12 text-center border border-gray-400 px-1 py-2">
                     <span>{item.title}が出た確率</span>
                   </dt>
-                  <dd className="w-6/12 text-right border border-gray-400 px-1 py-2">
+                  <dd className="w-4/12 md:w-6/12 text-right border border-gray-400 px-1 py-2">
                     <span id={item.percentageID}>0</span>
                     <span>%</span>
                   </dd>

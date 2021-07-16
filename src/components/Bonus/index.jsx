@@ -24,16 +24,16 @@ export const Bonus = () => {
 
   return (
     <div className="py-10">
-      <h1 className="py-4 text-3xl font-bold text-center bg-black text-yellow-300 sm:text-2xl">
+      <h1 className="py-4 md:text-3xl font-bold text-center bg-black text-yellow-300 text-2xl">
         【おまけ】
         <br />
         スマホゲームに捧げた命の時間
       </h1>
       <div className="container py-10">
-        <p className="text-center sm:text-left sm:flex sm:justify-center">
+        <p className="md:text-center text-left flex justify-center">
           課金はしてないからセーフ！と思ったそこのあなた！ 時は金なりですよ！！
         </p>
-        <div className="flex justify-center gap-8 py-4 sm:flex-col sm:text-center">
+        <div className="md:text-left flex md:flex-row justify-center gap-8 py-4 flex-col text-center">
           <div>
             <span className="font-bold">
               一日のプレイ時間

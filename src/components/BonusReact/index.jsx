@@ -9,9 +9,8 @@ export const BonusReact = () => {
   const handleChangeLoginDays = (e) => {
     setLoginDays(() => e.target.value);
   };
-  const calcPlayTime = () => {
-    return playTime;
-  };
+  const totalPlayTime = Math.round(((playTime * loginDays) / 60) * 100) / 100;
+  const lossAmount = totalPlayTime * 1000;
   return (
     <div className="py-10">
       <h1 className="py-4 md:text-3xl font-bold text-center bg-black text-yellow-300 text-2xl">
@@ -33,7 +32,6 @@ export const BonusReact = () => {
               value={playTime}
               onChange={handleChangePlayTime}
               type="number"
-              placeholder="入力"
               className="input mx-2"
             />
             <span className="font-bold">分</span>
@@ -47,7 +45,6 @@ export const BonusReact = () => {
               value={loginDays}
               onChange={handleChangeLoginDays}
               type="number"
-              placeholder="入力"
               className="input mx-2"
             />
             <span className="font-bold">日</span>
@@ -63,14 +60,12 @@ export const BonusReact = () => {
         <div className="text-center">
           <div>
             <span>プレイ時間合計</span>
-            <span className="text-3xl text-red-500 px-1">{loginDays}</span>
+            <span className="text-3xl text-red-500 px-1">{totalPlayTime}</span>
             <span>時間</span>
           </div>
           <div>
             <span>時給1,000円計算で </span>
-            <span id="lossMoney" className="text-3xl text-red-500 px-1">
-              0
-            </span>
+            <span className="text-3xl text-red-500 px-1">{lossAmount}</span>
             <span>円の損失</span>
           </div>
         </div>

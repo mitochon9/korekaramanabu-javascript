@@ -1,25 +1,17 @@
-export const Bonus = () => {
-  const calcGameTime = () => {
-    // inputの要素を取得
-    const getTimeInput = document.getElementById("playTimeInput");
-    const getDaysInput = document.getElementById("playDaysInput");
-    // 要素を取得したinputの値を取得
-    const getTimeValue = getTimeInput.value;
-    const getDaysValue = getDaysInput.value;
-    // 出力先を取得
-    const playTime = document.getElementById("playTime");
-    const lossMoney = document.getElementById("lossMoney");
-    // 取得した値を指定した要素に出力
-    playTime.innerHTML =
-      Math.round(((getTimeValue * getDaysValue) / 60) * 100) / 100;
-    lossMoney.innerHTML = Math.round(
-      ((getTimeValue * getDaysValue) / 60) * 1000
-    );
+import { useState } from "react";
+
+export const BonusReact = () => {
+  const [playTime, setPlayTime] = useState(0);
+  const [loginDays, setLoginDays] = useState(0);
+  const handleChangePlayTime = (e) => {
+    setPlayTime(() => e.target.value);
   };
-
-  // bigHitPercentage.innerHTML =
-  //   Math.round((bigHitValue / gachaValue) * 10000) / 100;
-
+  const handleChangeLoginDays = (e) => {
+    setLoginDays(() => e.target.value);
+  };
+  const calcPlayTime = () => {
+    return playTime;
+  };
   return (
     <div className="py-10">
       <h1 className="py-4 md:text-3xl font-bold text-center bg-black text-yellow-300 text-2xl">
@@ -38,8 +30,9 @@ export const Bonus = () => {
               <br />約
             </span>
             <input
+              value={playTime}
+              onChange={handleChangePlayTime}
               type="number"
-              id="playTimeInput"
               placeholder="入力"
               className="input mx-2"
             />
@@ -51,8 +44,9 @@ export const Bonus = () => {
               <br />約
             </span>
             <input
+              value={loginDays}
+              onChange={handleChangeLoginDays}
               type="number"
-              id="playDaysInput"
               placeholder="入力"
               className="input mx-2"
             />
@@ -60,18 +54,16 @@ export const Bonus = () => {
           </div>
         </div>
 
-        <div className="text-center py-4">
-          <button onClick={calcGameTime} className="btn btn_caution">
+        {/* <div className="text-center py-4">
+          <button onClick={calcPlayTime} className="btn btn_caution">
             計算する
           </button>
-        </div>
+        </div> */}
 
         <div className="text-center">
           <div>
             <span>プレイ時間合計</span>
-            <span id="playTime" className="text-3xl text-red-500 px-1">
-              0
-            </span>
+            <span className="text-3xl text-red-500 px-1">{loginDays}</span>
             <span>時間</span>
           </div>
           <div>

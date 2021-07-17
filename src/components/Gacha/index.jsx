@@ -105,7 +105,7 @@ export const Gacha = () => {
     const missResult = document.getElementById("missResult");
     const hitResult = document.getElementById("hitResult");
     const bigHitResult = document.getElementById("bigHitResult");
-    const bighitMoney = document.getElementById("bigHitMoney");
+    const bigHitMoney = document.getElementById("bigHitMoney");
     missResult.innerHTML = "";
     hitResult.innerHTML = "";
     bigHitResult.innerHTML = "";
@@ -123,7 +123,7 @@ export const Gacha = () => {
         bigHitValue += 1;
         gachaValue += 1;
         fullCountBigHitValue += 1;
-        bighitMoney.innerHTML = Math.round((gachaValue * 280) / bigHitValue);
+        bigHitMoney.innerHTML = Math.round((gachaValue * 280) / bigHitValue);
         return bigHitInnerResult(
           fullCountMissValue,
           fullCountHitValue,
@@ -165,9 +165,31 @@ export const Gacha = () => {
     bigHitResult.innerHTML = fullCountBigHitValue;
   };
 
+  const resetAll = () => {
+    const gacha = document.getElementById("gachaValue");
+    const missPercentage = document.getElementById("missPercentage");
+    const hitPercentage = document.getElementById("hitPercentage");
+    const bigHitPercentage = document.getElementById("bigHitPercentage");
+    const money = document.getElementById("money");
+    const bigHitMoney = document.getElementById("bigHitMoney");
+    missValue = 0;
+    miss.innerHTML = missValue;
+    hitValue = 0;
+    hit.innerHTML = hitValue;
+    bigHitValue = 0;
+    bigHit.innerHTML = bigHitValue;
+    missPercentage.innerHTML = 0;
+    hitPercentage.innerHTML = 0;
+    bigHitPercentage.innerHTML = 0;
+    gachaValue = 0;
+    gacha.innerHTML = gachaValue;
+    money.innerHTML = 0;
+    bigHitMoney.innerHTML = 0;
+  };
+
   return (
     <div>
-      <div className="md:py-4 py-0">
+      <div className="md:py-4 py-0 text-center">
         <div className="container md:py-10 py-4">
           <h1 className="md:text-3xl font-bold flex justify-center text-2xl">
             話題の最強キャラ「太陽の塔子」 を一点狙いしよう！！
@@ -197,8 +219,11 @@ export const Gacha = () => {
           <button onClick={tenCount} className="btn btn_basic">
             10連ガチャを引く
           </button>
-          <button onClick={fullCount} className="btn btn_basic">
+          <button onClick={fullCount} className="btn btn_caution">
             お目当てキャラが出るまで引く
+          </button>
+          <button onClick={resetAll} className="btn btn_basic">
+            リセット
           </button>
         </div>
 

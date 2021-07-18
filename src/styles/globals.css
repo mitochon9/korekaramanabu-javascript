@@ -4,7 +4,8 @@
 
 @layer components {
   .btn {
-    @apply px-4 py-2 font-bold rounded-lg shadow-md;
+    @apply px-4 py-2 font-bold rounded-lg relative translate-y-[-2px] translate-x-[-2px] active:translate-y-0 active:translate-x-0 active:shadow-none;
+    box-shadow: 2px 2px #666;
   }
 
   .btn_basic {

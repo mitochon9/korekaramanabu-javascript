@@ -1,9 +1,10 @@
-import { Gacha } from "src/components/Gacha";
+import { GachaReact } from "src/components/GachaReact";
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
-      <Gacha />
+      <GachaReact />
     </div>
   );
-}
+};
+export default Home;

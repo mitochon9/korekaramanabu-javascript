@@ -3,11 +3,11 @@ import { useState } from "react";
 export const BonusReact = () => {
   const [playTime, setPlayTime] = useState(0);
   const handleChangePlayTime = (e) => {
-    setPlayTime(() => e.target.value);
+    setPlayTime(e.target.value);
   };
   const [loginDays, setLoginDays] = useState(0);
   const handleChangeLoginDays = (e) => {
-    setLoginDays(() => e.target.value);
+    setLoginDays(e.target.value);
   };
   const totalPlayTime = Math.round(((playTime * loginDays) / 60) * 100) / 100;
   const lossAmount = totalPlayTime * 1000;

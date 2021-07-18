@@ -43,7 +43,7 @@ export const Gacha = () => {
       // ハズレのメッセージを作成して出力
       const missMessage = document.createTextNode("ハズレ！ ");
       result.appendChild(missMessage);
-    } else if (probability <= 996) {
+    } else if (probability <= 995) {
       // 各変数をカウント
 
       hitValue += 1;

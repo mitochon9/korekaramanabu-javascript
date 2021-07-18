@@ -185,7 +185,7 @@ export const GachaReact = () => {
 
         <div className="py-4">
           <h2 className="text-center font-bold text-2xl">今回の結果</h2>
-          <div className="flex flex-col flex-wrap md:flex-row md:gap-6 text-xl mt-2 md:mt-4">
+          <div className="flex justify-around flex-wrap md:flex-row md:gap-6 text-xl mt-2 md:mt-4">
             {/* {gacha.map((result) => {
               return (
                 <span key={result.id} className="inline-block">
@@ -195,7 +195,10 @@ export const GachaReact = () => {
             })} */}
             <span>ハズレ{missCount}回</span>
             <span>アタリ{hitCount}回</span>
-            <span>大当たり{purposeCount}回</span>
+            <span>
+              <span className="text-red-500 font-bold">大当たり</span>
+              {purposeCount}回
+            </span>
           </div>
         </div>
 

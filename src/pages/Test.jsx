@@ -1,7 +1,7 @@
 // import { useState, useEffect } from "react";
 // import NumberEasing from "../../node_modules/react-number-easing/src/index";
 // var intervalId;​
-function Test() {
+const Test = () => {
   // const [value, setValue] = useState(0);
   // function onUpdate() {
   //   const val = Math.floor(Math.random() * 10001);
@@ -16,5 +16,5 @@ function Test() {
   //     <NumberEasing value={value} />
   //   </div>
   // );
-}
+};
 export default Test;

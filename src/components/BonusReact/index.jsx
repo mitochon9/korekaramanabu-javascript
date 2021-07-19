@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 export const BonusReact = () => {
-  const [playTime, setPlayTime] = useState(0);
+  const [playTime, setPlayTime] = useState("");
   const handleChangePlayTime = (e) => {
     setPlayTime(e.target.value);
   };
-  const [loginDays, setLoginDays] = useState(0);
+  const [loginDays, setLoginDays] = useState("");
   const handleChangeLoginDays = (e) => {
     setLoginDays(e.target.value);
   };

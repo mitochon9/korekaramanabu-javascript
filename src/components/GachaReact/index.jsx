@@ -1,6 +1,7 @@
 import Image from "next/image";
 import hero from "public/hero.png";
-import { useEffect, useState } from "react";
+// import NumberEasing from "react-number-easing";
+import { useState } from "react";
 import { BonusReact } from "src/components/BonusReact";
 import classes from "src/components/Gacha/Gacha.module.css";
 
@@ -56,24 +57,22 @@ export const GachaReact = () => {
   };
 
   const [gacha, setGacha] = useState([]);
+  const [gachaAnimation, setGachaAnimation] = useState(false);
 
   const handleGacha = (e) => {
     const probability = randomNum();
-    // setGacha((e) => [
-    //   ...gacha,
-    //   {
-    //     id: gacha.length,
-    //     result:
-    //       // ランダムに選ばれた変数が1から880（88％）なら
-    //       probability <= 880
-    //         ? ITEMS[0].result
-    //         : // ランダムに選ばれた変数が881から996（11.6％）なら
-    //         probability <= 996
-    //         ? ITEMS[1].result
-    //         : // ランダムに選ばれた変数が997から1000（0.4％）なら
-    //           ITEMS[2].result,
-    //   },
-    // ]);
+    setGacha((gacha) =>
+      // ランダムに選ばれた変数が1から880（88％）なら
+      probability <= 880
+        ? ITEMS[0].result
+        : // ランダムに選ばれた変数が881から996（11.6％）なら
+        probability <= 996
+        ? ITEMS[1].result
+        : // ランダムに選ばれた変数が997から1000（0.4％）なら
+          ITEMS[2].result
+    );
+    setGachaAnimation(gachaAnimation === false ? true : false);
+    console.log(gachaAnimation);
     if (probability <= 880) {
       handletotalMissCount();
       handleMissCount();
@@ -185,6 +184,17 @@ export const GachaReact = () => {
 
         <div className="py-4">
           <h2 className="text-center font-bold text-2xl">今回の結果</h2>
+          <span
+            className={`relative duration-300 block text-center
+              ${
+                gachaAnimation === true
+                  ? "gacha_animation"
+                  : "gacha_pre_animation"
+              }
+            `}
+          >
+            {gacha}
+          </span>
           <div className="flex justify-around flex-wrap md:flex-row md:gap-6 text-xl mt-2 md:mt-4">
             {/* {gacha.map((result) => {
               return (

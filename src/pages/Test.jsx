@@ -2,6 +2,7 @@
 // import NumberEasing from "../../node_modules/react-number-easing/src/index";
 // var intervalId;​
 const Test = () => {
+  return <div></div>;
   // const [value, setValue] = useState(0);
   // function onUpdate() {
   //   const val = Math.floor(Math.random() * 10001);

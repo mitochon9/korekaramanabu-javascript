@@ -31,7 +31,7 @@ export const BonusReact = () => {
             <input
               value={playTime}
               onChange={handleChangePlayTime}
-              type="number"
+              type="tel"
               className="input mx-2"
             />
             <span className="font-bold">分</span>
@@ -44,7 +44,7 @@ export const BonusReact = () => {
             <input
               value={loginDays}
               onChange={handleChangeLoginDays}
-              type="number"
+              type="tel"
               className="input mx-2"
             />
             <span className="font-bold">日</span>

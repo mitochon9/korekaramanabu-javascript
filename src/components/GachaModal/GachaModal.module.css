@@ -1,5 +1,6 @@
 .off_modal {
-  @apply hidden;
+  @apply hidden opacity-0;
+  transform: scale(0);
 }
 
 .on_modal {
@@ -18,7 +19,8 @@
 }
 
 .off_result {
-  @apply hidden;
+  @apply hidden opacity-0;
+  transform: scale(0);
 }
 
 .on_result {

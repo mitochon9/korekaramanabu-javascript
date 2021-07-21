@@ -1,9 +1,11 @@
 import Image from "next/image";
 import hero from "public/hero.png";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BonusReact } from "src/components/BonusReact";
 import classes from "src/components/Gacha/Gacha.module.css";
 import CountUp from "react-countup";
+import { GachaModal } from "src/components/GachaModal";
+import { ExtremesResult } from "src/components/ExtremesResult";
 
 export const GachaReact = () => {
   const [count, setCount] = useState(0);
@@ -48,7 +50,6 @@ export const GachaReact = () => {
     totalPurposeCount === 0
       ? moneySpent
       : Math.round((moneySpent / totalPurposeCount) * 100) / 100;
-  console.log(count, moneySpent, totalPurposeCount, AmountToJackpot);
 
   // 1から1000のランダムな値を得る関数
   const randomNum = (min, max) => {
@@ -58,7 +59,10 @@ export const GachaReact = () => {
   };
 
   const [gacha, setGacha] = useState([]);
-  const [gachaAnimation, setGachaAnimation] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [showExtremesResult, setShowExtremesResult] = useState(false);
 
   const handleGacha = (e) => {
     const probability = randomNum();
@@ -72,8 +76,10 @@ export const GachaReact = () => {
         : // ランダムに選ばれた変数が997から1000（0.4％）なら
           ITEMS[2].result
     );
-    setGachaAnimation(!gachaAnimation);
-    console.log(gachaAnimation);
+    // setGachaAnimation(true);
+    // console.log(gachaAnimation);
+    setShowModal(true);
+    setShowExtremesResult(false);
     if (probability <= 880) {
       handleTotalMissCount();
       handleMissCount();
@@ -102,17 +108,18 @@ export const GachaReact = () => {
   };
 
   // 10連ガチャを実行する関数
-  const onClickTenConsecutive = () => {
-    setMissCount((e) => 0);
-    setHitCount((e) => 0);
-    setPurposeCount((e) => 0);
-    for (let index = 0; index < 10; index++) {
-      handleGacha();
-    }
-  };
+  // const onClickTenConsecutive = () => {
+  //   setMissCount((e) => 0);
+  //   setHitCount((e) => 0);
+  //   setPurposeCount((e) => 0);
+  //   for (let index = 0; index < 10; index++) {
+  //     handleGacha();
+  //   }
+  // };
 
   // 大当たりが出るまで実行する関数
   const goToExtremes = (e) => {
+    setShowExtremesResult(true);
     setMissCount((e) => 0);
     setHitCount((e) => 0);
     setPurposeCount((e) => 0);
@@ -141,10 +148,16 @@ export const GachaReact = () => {
     setTotalMissCount((e) => 0);
     setTotalHitCount((e) => 0);
     setTotalPurposeCount((e) => 0);
+    setShowExtremesResult(false);
   };
 
   return (
     <div>
+      <GachaModal
+        result={gacha}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <div className="md:py-4 py-0 text-center">
         <div className="container md:py-10 py-4">
           <h1 className="md:text-3xl font-bold flex justify-center text-2xl">
@@ -168,57 +181,33 @@ export const GachaReact = () => {
         一回あたりのガチャ単価：280円
       </span>
       <div className="container py-10">
-        <div className="text-center flex flex-wrap justify-center gap-4">
-          <button onClick={onClickSingle} className="btn btn_basic">
-            ガチャを引く
+        <div className="text-center flex flex-wrap justify-center items-center gap-4">
+          <button onClick={onClickSingle} className="gacha_btn gacha_btn_basic">
+            ガチャる
           </button>
-          <button onClick={onClickTenConsecutive} className="btn btn_basic">
+          {/* <button onClick={onClickTenConsecutive} className="btn btn_basic">
             10連ガチャを引く
+          </button> */}
+          <button
+            onClick={goToExtremes}
+            className="gacha_btn gacha_btn_caution"
+          >
+            禁断のボタン
           </button>
-          <button onClick={goToExtremes} className="btn btn_caution">
-            札束で殴り合う
-          </button>
-          <button onClick={reset} className="btn btn_basic">
+          <button
+            onClick={reset}
+            className="gacha_btn gacha_btn_basic w-16 h-16 text-xs"
+          >
             リセット
           </button>
         </div>
 
-        <div className="py-4">
-          <h2 className="text-center font-bold text-2xl">今回の結果</h2>
-          <span
-            className={`relative duration-300 block text-center
-              ${
-                gachaAnimation === true
-                  ? "gacha_animation"
-                  : "gacha_pre_animation"
-              }
-            `}
-          >
-            {gacha}
-          </span>
-          <div className="flex justify-around flex-wrap md:flex-row md:gap-6 text-xl mt-2 md:mt-4">
-            {/* {gacha.map((result) => {
-              return (
-                <span key={result.id} className="inline-block">
-                  {result.result}
-                </span>
-              );
-            })} */}
-            {/* <span>ハズレ{missCount}回</span> */}
-            <span>
-              ハズレ
-              <CountUp end={missCount} duration={1} />回
-            </span>
-            <span>
-              アタリ
-              <CountUp end={hitCount} duration={1} />回
-            </span>
-            <span className="text-red-400 font-bold">
-              大当たり
-              <CountUp end={purposeCount} duration={1} />回
-            </span>
-          </div>
-        </div>
+        <ExtremesResult
+          missCount={missCount}
+          hitCount={hitCount}
+          purposeCount={purposeCount}
+          showExtremesResult={showExtremesResult}
+        />
 
         <div className="py-4">
           <h2 className="text-center font-bold text-2xl">累計</h2>

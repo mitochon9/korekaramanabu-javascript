@@ -1,0 +1,43 @@
+.off_modal {
+  @apply hidden;
+}
+
+.on_modal {
+  animation: onModal 0.3s ease-in-out;
+}
+
+@keyframes onModal {
+  from {
+    @apply opacity-0;
+    transform: scale(0);
+  }
+  to {
+    @apply opacity-100;
+    transform: scale(1);
+  }
+}
+
+.off_result {
+  @apply hidden;
+}
+
+.on_result {
+  animation: onResult 0.6s 0.1s ease-in-out;
+}
+
+@keyframes onResult {
+  0% {
+    @apply opacity-0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  /* 50% {
+    @apply opacity-0;
+    transform: scale(0) rotate(0deg);
+  } */
+
+  100% {
+    @apply opacity-100;
+    transform: scale(1) rotate(720deg);
+  }
+}

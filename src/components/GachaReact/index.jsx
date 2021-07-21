@@ -255,7 +255,7 @@ export const GachaReact = () => {
             </dt>
             <dd className="w-4/12 text-right border border-gray-400 px-1 py-2">
               <span>
-                <CountUp start={count} end={count} duration={1} />回
+                <CountUp end={count} duration={1} />回
               </span>
             </dd>
             <dt className="w-8/12 border border-gray-400 px-1 py-2">

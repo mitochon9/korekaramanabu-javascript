@@ -72,6 +72,7 @@ export const GachaReact = () => {
         : // ランダムに選ばれた変数が997から1000（0.4％）なら
           ITEMS[2].result
     );
+    setGachaAnimation(!gachaAnimation);
     console.log(gachaAnimation);
     if (probability <= 880) {
       handleTotalMissCount();
@@ -212,8 +213,8 @@ export const GachaReact = () => {
               アタリ
               <CountUp end={hitCount} duration={1} />回
             </span>
-            <span>
-              <span className="text-red-500 font-bold">大当たり</span>
+            <span className="text-red-400 font-bold">
+              大当たり
               <CountUp end={purposeCount} duration={1} />回
             </span>
           </div>
@@ -262,7 +263,7 @@ export const GachaReact = () => {
               <span>かかった金額</span>
             </dt>
             <dd className="w-4/12 text-right border border-gray-400 px-1 py-2">
-              <span>
+              <span className="text-red-500 font-bold text-lg">
                 <CountUp end={moneySpent} duration={1} />円
               </span>
             </dd>
@@ -270,7 +271,7 @@ export const GachaReact = () => {
               <span>お目当てキャラを1体引くのにかかった平均金額</span>
             </dt>
             <dd className="w-4/12 text-right border border-gray-400 px-1 py-2">
-              <span>
+              <span className="text-red-500 font-bold text-lg">
                 <CountUp end={AmountToJackpot} duration={1} />円
               </span>
             </dd>

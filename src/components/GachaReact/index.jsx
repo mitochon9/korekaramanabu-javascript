@@ -1,9 +1,9 @@
 import Image from "next/image";
 import hero from "public/hero.png";
-// import NumberEasing from "react-number-easing";
 import { useState } from "react";
 import { BonusReact } from "src/components/BonusReact";
 import classes from "src/components/Gacha/Gacha.module.css";
+import CountUp from "react-countup";
 
 export const GachaReact = () => {
   const [count, setCount] = useState(0);
@@ -21,19 +21,19 @@ export const GachaReact = () => {
   // }, []);
 
   const [totalMissCount, setTotalMissCount] = useState(0);
-  const handletotalMissCount = (e) => setTotalMissCount((e) => e + 1);
+  const handleTotalMissCount = (e) => setTotalMissCount((e) => e + 1);
 
   const [hitCount, setHitCount] = useState(0);
   const handleHitCount = (e) => setHitCount((e) => e + 1);
 
   const [totalHitCount, setTotalHitCount] = useState(0);
-  const handletotalHitCount = (e) => setTotalHitCount((e) => e + 1);
+  const handleTotalHitCount = (e) => setTotalHitCount((e) => e + 1);
 
   const [purposeCount, setPurposeCount] = useState(0);
   const handlePurposeCount = (e) => setPurposeCount((e) => e + 1);
 
   const [totalPurposeCount, setTotalPurposeCount] = useState(0);
-  const handletotalPurposeCount = (e) => setTotalPurposeCount((e) => e + 1);
+  const handleTotalPurposeCount = (e) => setTotalPurposeCount((e) => e + 1);
 
   const missPercent =
     count === 0 ? 0 : Math.round((totalMissCount / count) * 10000) / 100;
@@ -46,8 +46,9 @@ export const GachaReact = () => {
 
   const AmountToJackpot =
     totalPurposeCount === 0
-      ? "未当選"
-      : `${(Math.round(moneySpent / totalPurposeCount) * 100) / 100}円`;
+      ? moneySpent
+      : Math.round((moneySpent / totalPurposeCount) * 100) / 100;
+  console.log(count, moneySpent, totalPurposeCount, AmountToJackpot);
 
   // 1から1000のランダムな値を得る関数
   const randomNum = (min, max) => {
@@ -71,16 +72,15 @@ export const GachaReact = () => {
         : // ランダムに選ばれた変数が997から1000（0.4％）なら
           ITEMS[2].result
     );
-    setGachaAnimation(gachaAnimation === false ? true : false);
     console.log(gachaAnimation);
     if (probability <= 880) {
-      handletotalMissCount();
+      handleTotalMissCount();
       handleMissCount();
     } else if (probability <= 996) {
-      handletotalHitCount();
+      handleTotalHitCount();
       handleHitCount();
     } else {
-      handletotalPurposeCount();
+      handleTotalPurposeCount();
       handlePurposeCount();
     }
     handleCount();
@@ -119,13 +119,13 @@ export const GachaReact = () => {
       const probability = randomNum();
       handleCount();
       if (probability <= 880) {
-        handletotalMissCount();
+        handleTotalMissCount();
         handleMissCount();
       } else if (probability <= 996) {
-        handletotalHitCount();
+        handleTotalHitCount();
         handleHitCount();
       } else {
-        handletotalPurposeCount();
+        handleTotalPurposeCount();
         handlePurposeCount();
         return;
       }
@@ -203,11 +203,18 @@ export const GachaReact = () => {
                 </span>
               );
             })} */}
-            <span>ハズレ{missCount}回</span>
-            <span>アタリ{hitCount}回</span>
+            {/* <span>ハズレ{missCount}回</span> */}
+            <span>
+              ハズレ
+              <CountUp end={missCount} duration={1} />回
+            </span>
+            <span>
+              アタリ
+              <CountUp end={hitCount} duration={1} />回
+            </span>
             <span>
               <span className="text-red-500 font-bold">大当たり</span>
-              {purposeCount}回
+              <CountUp end={purposeCount} duration={1} />回
             </span>
           </div>
         </div>
@@ -221,17 +228,21 @@ export const GachaReact = () => {
                   key={item.result}
                   className="flex flex-wrap md:w-4/12 mx-auto md:py-4 w-full py-2"
                 >
-                  <dt className="w-8/12 md:w-6/12 text-center border border-gray-400 px-1 py-2">
+                  <dt className="w-8/12 md:w-6/12 border border-gray-400 px-1 py-2">
                     <span>{item.result}が出た回数</span>
                   </dt>
                   <dd className="w-4/12 md:w-6/12 text-right border border-gray-400 px-1 py-2">
-                    <span>{item.count}回</span>
+                    <span>
+                      <CountUp end={item.count} duration={1} />回
+                    </span>
                   </dd>
-                  <dt className="w-8/12 md:w-6/12 text-center border border-gray-400 px-1 py-2">
+                  <dt className="w-8/12 md:w-6/12 border border-gray-400 px-1 py-2">
                     <span>{item.result}が出た確率</span>
                   </dt>
                   <dd className="w-4/12 md:w-6/12 text-right border border-gray-400 px-1 py-2">
-                    <span>{item.percent}%</span>
+                    <span>
+                      <CountUp end={item.percent} duration={1} decimals={2} />%
+                    </span>
                   </dd>
                 </dl>
               );
@@ -239,23 +250,29 @@ export const GachaReact = () => {
           </div>
 
           <dl className="flex flex-wrap md:w-6/12 md:ml-auto md:mr-0 py-4 w-full mx-auto">
-            <dt className="w-8/12 text-center border border-gray-400 px-1 py-2">
+            <dt className="w-8/12 border border-gray-400 px-1 py-2">
               <span>ガチャを引いた回数</span>
             </dt>
             <dd className="w-4/12 text-right border border-gray-400 px-1 py-2">
-              <span>{count}回</span>
+              <span>
+                <CountUp start={count} end={count} duration={1} />回
+              </span>
             </dd>
-            <dt className="w-8/12 text-center border border-gray-400 px-1 py-2">
+            <dt className="w-8/12 border border-gray-400 px-1 py-2">
               <span>かかった金額</span>
             </dt>
             <dd className="w-4/12 text-right border border-gray-400 px-1 py-2">
-              <span>{moneySpent}円</span>
+              <span>
+                <CountUp end={moneySpent} duration={1} />円
+              </span>
             </dd>
-            <dt className="w-8/12 text-center border border-gray-400 px-1 py-2">
-              <span>お目当てキャラを1体引くのにかかった金額</span>
+            <dt className="w-8/12 border border-gray-400 px-1 py-2">
+              <span>お目当てキャラを1体引くのにかかった平均金額</span>
             </dt>
             <dd className="w-4/12 text-right border border-gray-400 px-1 py-2">
-              <span>{AmountToJackpot}</span>
+              <span>
+                <CountUp end={AmountToJackpot} duration={1} />円
+              </span>
             </dd>
           </dl>
         </div>

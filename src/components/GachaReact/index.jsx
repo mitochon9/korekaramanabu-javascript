@@ -90,6 +90,7 @@ export const GachaReact = () => {
     }
     handleCount();
   };
+  console.log(showModal);
 
   const ITEMS = [
     { result: "ハズレ", count: totalMissCount, percent: missPercent },
@@ -153,6 +154,7 @@ export const GachaReact = () => {
     setTotalPurposeCount((e) => 0);
     setShowExtremesResult(false);
   };
+
   console.log(gacha);
 
   return (

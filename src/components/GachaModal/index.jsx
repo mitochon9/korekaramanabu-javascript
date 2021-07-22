@@ -1,13 +1,13 @@
 import classes from "src/components/GachaModal/GachaModal.module.css";
 
 export const GachaModal = ({ result, showModal, setShowModal }) => {
-  const closeModal = () => setShowModal(!showModal);
+  const closeModal = () => setShowModal(false);
   return (
     <div
       id="overlay"
       onClick={closeModal}
       className={`fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-40 duration-300 ${
-        showModal === false ? "hidden" : ""
+        showModal === false ? classes.off_overlay : classes.on_overlay
       }`}
     >
       <div

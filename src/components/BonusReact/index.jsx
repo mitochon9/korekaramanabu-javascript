@@ -20,7 +20,9 @@ export const BonusReact = () => {
       </h1>
       <div className="container py-10">
         <p className="md:text-center text-left flex justify-center">
-          課金はしてないからセーフ！と思ったそこのあなた！ 時は金なりですよ！！
+          課金はしてないからセーフ！と思ったそこのあなた！
+          <br />
+          時は金なりですよ！！
         </p>
         <div className="md:text-left flex md:flex-row justify-center gap-8 py-4 flex-col text-center">
           <div>

@@ -2,7 +2,6 @@ import classes from "src/components/GachaModal/GachaModal.module.css";
 
 export const GachaModal = ({ result, showModal, setShowModal }) => {
   const closeModal = () => setShowModal(!showModal);
-  console.log(showModal);
   return (
     <div
       id="overlay"

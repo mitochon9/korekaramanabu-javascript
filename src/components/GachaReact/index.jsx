@@ -1,6 +1,6 @@
 import Image from "next/image";
 import hero from "public/hero.png";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BonusReact } from "src/components/BonusReact";
 import classes from "src/components/Gacha/Gacha.module.css";
 import CountUp from "react-countup";
@@ -69,15 +69,13 @@ export const GachaReact = () => {
     setGacha((gacha) =>
       // ランダムに選ばれた変数が1から880（88％）なら
       probability <= 880
-        ? ITEMS[0].result
+        ? "ハズレ！"
         : // ランダムに選ばれた変数が881から996（11.6％）なら
         probability <= 996
-        ? ITEMS[1].result
+        ? "アタリ！"
         : // ランダムに選ばれた変数が997から1000（0.4％）なら
-          ITEMS[2].result
+          "太陽の塔子ゲット！"
     );
-    // setGachaAnimation(true);
-    // console.log(gachaAnimation);
     setShowModal(true);
     setShowExtremesResult(false);
     if (probability <= 880) {
@@ -96,7 +94,12 @@ export const GachaReact = () => {
   const ITEMS = [
     { result: "ハズレ", count: totalMissCount, percent: missPercent },
     { result: "アタリ", count: totalHitCount, percent: hitPercent },
-    { result: "大当たり", count: totalPurposeCount, percent: purposePercent },
+    {
+      result: "大当たり",
+      count: totalPurposeCount,
+      percent: purposePercent,
+      img: hero,
+    },
   ];
 
   // 単発ガチャを実行する関数
@@ -150,6 +153,7 @@ export const GachaReact = () => {
     setTotalPurposeCount((e) => 0);
     setShowExtremesResult(false);
   };
+  console.log(gacha);
 
   return (
     <div>

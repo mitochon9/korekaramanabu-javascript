@@ -13,8 +13,6 @@ export const ApiTest = () => {
     getPosts();
   }, [getPosts]);
 
-  console.log(posts["results"]);
-
   return (
     <div>
       {/* {posts.map((post) => {

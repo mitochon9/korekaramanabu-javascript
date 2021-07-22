@@ -8,6 +8,11 @@ import { GachaModal } from "src/components/GachaModal";
 import { ExtremesResult } from "src/components/ExtremesResult";
 
 export const GachaReact = () => {
+  const [react, setReact] = useState(true);
+  useEffect(() => {
+    setReact(true);
+  }, []);
+
   const [count, setCount] = useState(0);
   const handleCount = (e) => setCount((e) => e + 1);
 
@@ -90,7 +95,6 @@ export const GachaReact = () => {
     }
     handleCount();
   };
-  console.log(showModal);
 
   const ITEMS = [
     { result: "ハズレ", count: totalMissCount, percent: missPercent },
@@ -154,8 +158,6 @@ export const GachaReact = () => {
     setTotalPurposeCount((e) => 0);
     setShowExtremesResult(false);
   };
-
-  console.log(gacha);
 
   return (
     <div>

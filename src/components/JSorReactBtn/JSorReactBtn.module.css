@@ -1,0 +1,19 @@
+.on {
+  @apply bg-cyan-400 text-white;
+}
+.off {
+  @apply bg-gray-300 text-gray-500;
+}
+
+.react_on {
+  /* box-shadow: -2px 0 black; */
+}
+.react_off {
+  box-shadow: -4px 0 2px #333;
+}
+.js_on {
+  /* box-shadow: 2px 0 black; */
+}
+.js_off {
+  box-shadow: 4px 0 2px #333;
+}

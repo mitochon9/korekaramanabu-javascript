@@ -20,7 +20,7 @@ export const PageHead = ({
       <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL} />
       <meta
         property="og:image"
-        content={`${process.env.NEXT_PUBLIC_SITE_URL}/ogp.png`}
+        content={`${process.env.NEXT_PUBLIC_SITE_URL}/hero.png`}
       />
       <meta
         property="og:site_name"
